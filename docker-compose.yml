@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  # Database
+  # MariaDB is used to support both amd64 & arm64 architecture
+  db:
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wpsite
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:6.4.2-php8.2
+    links:
+      - db
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      # debug mode (0 = false, 1 = true)
+      WORDPRESS_DEBUG: 0
+    networks:
+      - wpsite
+
+  wpcli:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli
+    links:
+      - db:db
+    entrypoint: wp
+    command: "--info"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./:/var/www/html
+      - db_data:/var/lib/mysql
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
+volumes:
+  db_data:
