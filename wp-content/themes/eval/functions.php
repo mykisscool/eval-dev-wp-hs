@@ -164,3 +164,145 @@ return count( $comments_by_type['comment'] );
 return $count;
 }
 }
+
+/**
+ * Searches through PHP SERVER superglobals for the correct key containing client IP address; varies based on
+ * architecture and server configuration.
+ * @return mixed|string
+ */
+function get_ip_address() {
+
+    // Cloudflare
+    if( !empty($_SERVER['HTTP_CF_CONNECTING_IP']) && is_valid_ip($_SERVER['HTTP_CF_CONNECTING_IP']) ) {
+        return $_SERVER['HTTP_CF_CONNECTING_IP'];
+    }
+
+    // AWS Cloudfront
+    if( !empty($_SERVER['CLOUDFRONT_VIEWER_ADDRESS']) ) {
+        // The Cloudfront-Viewer-Address is in the format IP:PORT
+        // Extract the IP address and ignore the PORT
+        $parts = explode( ':', $_SERVER['CLOUDFRONT_VIEWER_ADDRESS'] );
+        if( is_valid_ip($parts[0]) ) {
+            return $parts[0];
+        }
+    }
+
+    // Pantheon, AWS Load Balancer, and IPs passing through proxies
+    if( !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+        // Check if multiple IP addresses exist in var
+        $iplist = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
+        foreach( $iplist as $ip ) {
+            if( is_valid_ip( $ip ) ) {
+                return $ip;
+            }
+        }
+    }
+
+    // Loop through other _SERVER vars that might contain IP address
+    $keys = array(
+        'HTTP_X_FORWARDED',
+        'HTTP_FORWARDED_FOR',
+        'HTTP_FORWARDED',
+        'HTTP_X_CLUSTER_CLIENT_IP',
+        'HTTP_CLIENT_IP',
+        'REMOTE_ADDR'
+    );
+
+    foreach( $keys as $key ) {
+        if( !empty($_SERVER[$key]) && is_valid_ip($_SERVER[$key]) ) {
+            return $_SERVER[$key];
+        }
+    }
+
+    return ''; // Couldn't find the IP in the usual places
+}
+
+/**
+ * @param $ip
+ * @return bool
+ */
+function is_valid_ip($ip) {
+    $options = FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
+    return filter_var( $ip, FILTER_VALIDATE_IP, $options ) !== false;
+}
+
+/**
+ * @return string|void
+ */
+function get_city_available_message() {
+    $ip = get_ip_address();
+    $ip = '35.142.93.21'; // Just to simulate a non-private IP address
+    $is_valid_ip = is_valid_ip( $ip );
+
+    if ( $is_valid_ip ) {
+        $city = file_get_contents( "https://ipapi.co/{$ip}/city/" );
+    }
+
+    if ( $is_valid_ip && $city ) {
+        return '&#127968; Our Gutters available in ' . file_get_contents( "https://ipapi.co/{$ip}/city/" );
+    }
+}
+
+/**
+ * New post type - Gutter
+ * @return void
+ */
+function my_custom_post_gutter() {
+
+    $labels = array(
+        'name'               => 'Gutters',
+        'singular_name'      => 'Gutter',
+        'add_new'            => 'Add New Gutter',
+        'add_new_item'       => 'Add New Gutter',
+        'edit_item'          => 'Edit Gutter',
+        'new_item'           => 'New Gutter',
+        'all_items'          => 'All Gutters',
+        'view_item'          => 'View Gutter',
+        'search_items'       => 'Search Gutters',
+        'not_found'          => 'No gutters found',
+        'not_found_in_trash' => 'No gutters found in the Trash'
+    );
+
+    $supports = array(
+        'title',
+        'editor',
+        'thumbnail',
+        'excerpt',
+        'custom-fields'
+    );
+
+    $args = array(
+        'labels'            => $labels,
+        'supports'          => $supports,
+        'description'       => 'Custom gutter post type',
+        'public'            => true,
+        'show_ui'           => true,
+        'menu_position'     => 5,
+        'has_archive'       => false,
+        'show_in_menu'      => true,
+        'show_in_nav_menus' => true,
+        'menu_icon'         => true
+    );
+
+    register_post_type( 'gutter', $args );
+}
+add_action( 'init', 'my_custom_post_gutter' );
+
+/**
+ * New categories for "gutter"
+ * @return void
+ */
+function my_custom_taxonomy_standard_gutter() {
+
+    $args = array(
+        'label'             => 'Gutter Categories',
+        'hierarchical'      => true,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'gutter' ),
+    );
+
+    register_taxonomy( 'gutter-category', 'gutter', $args );
+}
+add_action( 'init', 'my_custom_taxonomy_standard_gutter' );
