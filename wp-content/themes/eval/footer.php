@@ -1,7 +1,7 @@
 
 </main>
 
-<footer id="footer" role="contentinfo" class="fixed-bottom py-3 text-white">
+<footer id="footer" role="contentinfo" class="py-3 text-white">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 text-center text-md-left my-auto">

@@ -331,12 +331,80 @@ function get_gutter_category_array() {
 
     $category_data = array();
     foreach($categories as $category) {
-        $category_data[] = [
+        $category_data[] = array(
             'name' => $category->name,
             'description' => $category->description,
             'thumbnail' => null // @TODO Add thumbnail for custom post type category
-        ];
+        );
     }
 
     return array_slice($category_data, 0, 3); // @TODO Template expecting 3 - what happens with less than that?
+}
+
+/**
+ * New post type - Testimonial
+ * @return void
+ */
+function my_custom_post_testimonial() {
+
+    $labels = array(
+        'name'               => 'Testimonials',
+        'singular_name'      => 'Testimonial',
+        'add_new'            => 'Add New Testimonial',
+        'add_new_item'       => 'Add New Testimonial',
+        'edit_item'          => 'Edit Testimonial',
+        'new_item'           => 'New Testimonial',
+        'all_items'          => 'All Testimonials',
+        'view_item'          => 'View Testimonial',
+        'search_items'       => 'Search Testimonials',
+        'not_found'          => 'No testimonials found',
+        'not_found_in_trash' => 'No testimonials found in the Trash'
+    );
+
+    $supports = array(
+        'title',
+        'editor',
+        'thumbnail'
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'supports'           => $supports,
+        'description'        => 'Custom testimonial post type',
+        'hierarchical'       => false,
+        'query_var'          => false,
+        'public'             => false,
+        'publicly_queryable' => false,
+        'show_ui'            => true,
+        'menu_position'      => 6,
+        'has_archive'        => false,
+        'show_in_menu'       => true,
+        'show_in_nav_menus'  => false,
+        'capability_type'    => 'post',
+        'menu_icon'          => 'dashicons-star-half'
+    );
+
+    register_post_type( 'testimonial', $args );
+}
+add_action( 'init', 'my_custom_post_testimonial' );
+
+/**
+ * @return array
+ */
+function get_testimonials_array() {
+    $testimonials = get_posts( array(
+        'post_type' => 'testimonial',
+        'post_status' => 'publish',
+        'numberposts' => 4
+    ) );
+
+    $testimonial_data = array();
+    foreach( $testimonials as $testimonial ) {
+        $testimonial_data[] = array(
+            'name' => $testimonial->post_title,
+            'quote' => $testimonial->post_content
+        );
+    }
+
+    return $testimonial_data; // @TODO Template expecting 4 - what happens with less than that?
 }

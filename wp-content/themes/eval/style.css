@@ -31,6 +31,21 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     font-display: swap;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 120px !important; /** Fighting the reset above */
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        margin-bottom: 160px !important; /** Fighting the reset above */
+    }
+}
+
 header, footer, main {
     font-family: "Geist", sans-serif;
 }
@@ -55,6 +70,9 @@ nav li + li {
 /** Footer styles */
 #footer {
     background: #1d2430;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /** Homepage */
@@ -71,3 +89,24 @@ nav li + li {
     cursor: pointer;
 }
 
+#testimonials {
+    max-width: 900px;
+}
+
+#testimonials .btn {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+#testimonials .btn:hover {
+    cursor: default;
+}
+
+.testimonial p + p {
+    font-size: 0.875em;
+}
+
+#testimonials img {
+    width: 100%;
+    max-width:450px;
+}
