@@ -85,7 +85,7 @@ nav li + li {
     max-width:600px;
 }
 
-#branding img:hover {
+#branding img.desktop:hover {
     cursor: pointer;
 }
 

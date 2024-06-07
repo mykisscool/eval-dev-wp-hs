@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<div id="branding" class="container my-5">
+<section id="branding" class="container my-5">
     <div class="row">
         <div class="col-12 col-md-6 my-auto">
             <div id="site-title" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
@@ -25,10 +25,10 @@ get_header();
             <a href="/contact/" class="btn btn-dark px-4 mt-3 cta">Contact Us</a>
         </div>
         <div class="d-none d-md-block col-md-6">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image desktop" />
         </div>
     </div>
-</div>
+</section>
 
 <section id="gutter-types" class="row bg-light mx-0 py-3 py-md-5">
     <div class="container">
