@@ -166,6 +166,13 @@ return $count;
 }
 
 /**
+ * Enqueue scripts and styles.
+ */
+add_action( 'wp_enqueue_scripts', function() {
+    wp_enqueue_script( 'custom', get_theme_file_uri( 'js/scripts.js' ), array(), '1.0', true, array( 'strategy' => 'defer', 'in_footer' => true ) );
+});
+
+/**
  * Searches through PHP SERVER superglobals for the correct key containing client IP address; varies based on
  * architecture and server configuration.
  * @return mixed|string
@@ -272,16 +279,22 @@ function my_custom_post_gutter() {
     );
 
     $args = array(
-        'labels'            => $labels,
-        'supports'          => $supports,
-        'description'       => 'Custom gutter post type',
-        'public'            => true,
-        'show_ui'           => true,
-        'menu_position'     => 5,
-        'has_archive'       => false,
-        'show_in_menu'      => true,
-        'show_in_nav_menus' => true,
-        'menu_icon'         => true
+        'labels'             => $labels,
+        'supports'           => $supports,
+        'description'        => 'Custom gutter post type',
+        'hierarchical'       => false,
+        'query_var'          => true,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'menu_position'      => 5,
+        'has_archive'        => true,
+        'show_in_menu'       => true,
+        'show_in_nav_menus'  => true,
+        'capability_type'    => 'post',
+        'menu_icon'          => 'dashicons-hammer',
+        'rewrite'            => array( 'slug' => 'gutter' ),
+        'taxonomies'         => array( 'gutter-category' ),
     );
 
     register_post_type( 'gutter', $args );
@@ -300,9 +313,30 @@ function my_custom_taxonomy_standard_gutter() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'gutter' ),
+        'rewrite'           => array( 'slug' => 'gutter-category' ),
     );
 
-    register_taxonomy( 'gutter-category', 'gutter', $args );
+    register_taxonomy( 'gutter-category', array( 'gutter' ), $args );
 }
 add_action( 'init', 'my_custom_taxonomy_standard_gutter' );
+
+/**
+ * @return array
+ */
+function get_gutter_category_array() {
+    $categories = get_categories( array (
+        'taxonomy'   => 'gutter-category',
+        'hide_empty' => false
+    ) );
+
+    $category_data = array();
+    foreach($categories as $category) {
+        $category_data[] = [
+            'name' => $category->name,
+            'description' => $category->description,
+            'thumbnail' => null // @TODO Add thumbnail for custom post type category
+        ];
+    }
+
+    return array_slice($category_data, 0, 3); // @TODO Template expecting 3 - what happens with less than that?
+}

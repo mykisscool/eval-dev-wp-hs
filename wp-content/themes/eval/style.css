@@ -35,10 +35,6 @@ header, footer, main {
     font-family: "Geist", sans-serif;
 }
 
-.container-fluid{
-    max-width: 1300px;
-}
-
 /** Header/Footer navigation */
 #header nav a {
     color: inherit;
@@ -53,10 +49,25 @@ nav li {
 }
 
 nav li + li {
-    margin-left: 12px;
+    margin-left: 16px;
 }
 
 /** Footer styles */
 #footer {
     background: #1d2430;
 }
+
+/** Homepage */
+#branding h1 a {
+    color: inherit;
+}
+
+#branding img {
+    width: 100%;
+    max-width:600px;
+}
+
+#branding img:hover {
+    cursor: pointer;
+}
+
