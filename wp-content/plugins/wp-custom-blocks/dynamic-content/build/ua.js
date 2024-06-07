@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){const e=window.navigator.userAgent,d=/samsung|sec-|sm-/i.test(e),t=/iphone|ipad/i.test(e),i=/android/i.test(e);let n;n=d?"samsung-device":t?"ios-device":i?"android-device":"desktop-device",document.body.classList.add(n)}));

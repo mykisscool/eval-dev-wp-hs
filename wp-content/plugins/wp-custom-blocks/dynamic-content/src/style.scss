@@ -1,0 +1,52 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ */
+
+.dynamic-content {
+  /* Not .wp-block because we do not want to apply styles to the admin editor */
+  &.device-mobile:not(.wp-block) {
+	@media (min-width: 850px) {
+	  display: none;
+	}
+  }
+
+  /* Not .wp-block because we do not want to apply styles to the admin editor */
+  &.device-desktop:not(.wp-block) {
+	@media (max-width: 850px) {
+	  display: none;
+	}
+  }
+
+  /* By default, hide this content and allow the body class to dictate what is visible */
+  &.device-samsung:not(.wp-block),
+  &.device-android:not(.wp-block),
+  &.device-ios:not(.wp-block) {
+	display: none;
+  }
+
+}
+
+body.samsung-device {
+  .dynamic-content {
+	&.device-samsung {
+	  display: block;
+	}
+  }
+}
+
+body.android-device {
+  .dynamic-content {
+	&.device-android {
+	  display: block;
+	}
+  }
+}
+
+body.ios-device {
+  .dynamic-content {
+	&.device-ios {
+	  display: block;
+	}
+  }
+}

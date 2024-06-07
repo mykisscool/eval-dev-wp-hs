@@ -1,0 +1,10 @@
+{
+  "name": "mykisscool/wp-custom-blocks",
+  "description": "Custom Gutenberg blocks",
+  "type": "wordpress-plugin",
+  "version": "1.0.0",
+  "require": {},
+  "require-dev": {},
+  "post-update-cmd": [],
+  "post-install-cmd": []
+}

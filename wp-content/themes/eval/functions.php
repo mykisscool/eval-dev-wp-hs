@@ -295,6 +295,7 @@ function my_custom_post_gutter() {
         'menu_icon'          => 'dashicons-hammer',
         'rewrite'            => array( 'slug' => 'gutter' ),
         'taxonomies'         => array( 'gutter-category' ),
+        'show_in_rest'       => true
     );
 
     register_post_type( 'gutter', $args );

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wp-custom-blocks/dynamic-content",
+  "version": "1.0.0",
+  "title": "Dynamic Content",
+  "category": "widgets",
+  "icon": "screenoptions",
+  "description": "Dynamic Content Block",
+  "attributes": {
+    "device": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "textdomain": "wp-custom-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./ua.js"
+}
