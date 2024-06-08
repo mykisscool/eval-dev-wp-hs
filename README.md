@@ -4,7 +4,7 @@
 
 - Predominantly used [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 - Created custom post type "gutter" with custom category taxonomy "gutter-category"
-    - Navigation and homepage content driven from these custom post types
+    - Navigation and homepage content driven from this custom post type
 - Created custom post type "testimonial"
 - Created a custom homepage template
 - Used the [Swiffy Slider](https://swiffyslider.com/) carousel on the product page
