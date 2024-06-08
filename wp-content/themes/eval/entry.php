@@ -1,7 +1,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'my-5' ); ?>>
 <div class="container">
     <div class="row">
-        <div id="product-image" class="col-12 col-md-6">
+        <div id="product-image" class="col-12 col-md-6 mb-2 mb-md-0">
 
             <?php $featured_image = get_the_post_thumbnail_url( get_the_ID(), 'full' ); ?>
             <img src="<?php echo $featured_image; ?>" alt="<?php the_title(); ?>" class="img-fluid rounded" />
