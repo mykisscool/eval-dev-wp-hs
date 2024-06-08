@@ -1,10 +1,10 @@
 ;(function() {
     document.addEventListener('DOMContentLoaded', function() {
-
-        document.querySelector('.branding-image.desktop').onclick = function() {
-            let source = this.getAttribute('src');
-            basicLightbox.create(`<img src="${source}" alt="" class="basicLightbox" />`).show()
+        if(document.querySelector('.branding-image.desktop, #product-image img')) {
+            document.querySelector('.branding-image.desktop, #product-image img').onclick = function() {
+                let source = this.getAttribute('src');
+                basicLightbox.create(`<img src="${source}" alt="" class="basicLightbox" />`).show()
+            }
         }
-
     });
 })();

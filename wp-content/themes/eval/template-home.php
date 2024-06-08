@@ -20,12 +20,12 @@ get_header();
                 <?php echo bloginfo( 'description' ); ?>
             </div>
             <div class="d-md-none my-2">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image" />
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image img-fluid" />
             </div>
             <a href="/contact/" class="btn btn-dark px-4 mt-3 cta">Contact Us</a>
         </div>
         <div class="d-none d-md-block col-md-6">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image desktop" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Branding logo" class="rounded branding-image desktop img-fluid" />
         </div>
     </div>
 </section>
@@ -84,14 +84,14 @@ get_header();
                     <div class="d-none d-md-block col-md-6">
 
                         <?php // @TODO From the testimonials custom post type - select an image ?>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Testimonial image" class="rounded" />
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Testimonial image" class="rounded img-fluid" />
 
                     </div>
                 </div>
             </div>
 
         </div>
-    </div> <!-- // .row -->
+    </div>
 </section>
 
 <?php get_footer(); ?>

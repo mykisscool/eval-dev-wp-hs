@@ -80,12 +80,9 @@ nav li + li {
     color: inherit;
 }
 
-#branding img {
-    width: 100%;
-    max-width:600px;
-}
-
-#branding img.desktop:hover {
+#branding img.desktop:hover,
+#product-image img:hover
+{
     cursor: pointer;
 }
 
@@ -93,12 +90,14 @@ nav li + li {
     max-width: 900px;
 }
 
-#testimonials .btn {
+#testimonials .btn,
+#product-details > .btn {
     background-color: #e2e6ea;
     border-color: #dae0e5;
 }
 
-#testimonials .btn:hover {
+#testimonials .btn:hover,
+#product-details > .btn:hover {
     cursor: default;
 }
 
@@ -109,4 +108,17 @@ nav li + li {
 #testimonials img {
     width: 100%;
     max-width:450px;
+}
+
+/** Product page */
+.product-details p {
+    font-size: 1.25em;
+}
+
+#product-details ul {
+    list-style: none;
+}
+
+#product-details ul li:before {
+    content: '✓ ';
 }
