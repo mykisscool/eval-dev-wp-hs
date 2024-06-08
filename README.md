@@ -1,7 +1,5 @@
 ## Michael Petruniak
 
----
-
 ### Design decisions:
 
 - Bootstrap 4
