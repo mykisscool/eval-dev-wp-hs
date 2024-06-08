@@ -62,6 +62,7 @@ get_header();
             <p class="text-center text-secondary">We're proud of the work we do. But don't just take our word for it, here's what our customers have to say.</p>
 
             <?php // @TODO Address the extra margin/padding with the nested grids ?>
+            <?php // @TODO Validate there are in fact testimonials to display ?>
 
             <div class="container mt-4">
                 <div class="row">
@@ -82,10 +83,7 @@ get_header();
                         </div>
                     </div>
                     <div class="d-none d-md-block col-md-6">
-
-                        <?php // @TODO From the testimonials custom post type - select an image ?>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/placeholder-600x600.jpg" alt="Testimonial image" class="rounded img-fluid" />
-
+                        <img src="<?php echo get_testimonials_array()[0]['portrait'] ?>" alt="<?php echo get_testimonials_array()[0]['name'] ?>" class="rounded img-fluid" />
                     </div>
                 </div>
             </div>

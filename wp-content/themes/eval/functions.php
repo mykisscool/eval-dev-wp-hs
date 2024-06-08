@@ -402,8 +402,9 @@ function get_testimonials_array() {
     $testimonial_data = array();
     foreach( $testimonials as $testimonial ) {
         $testimonial_data[] = array(
-            'name'  => $testimonial->post_title,
-            'quote' => $testimonial->post_content
+            'name'     => $testimonial->post_title,
+            'quote'    => $testimonial->post_content,
+            'portrait' => get_the_post_thumbnail_url( $testimonial->ID, 'full' )
         );
     }
 
@@ -420,6 +421,6 @@ function get_gutter_custom_fields( int $post_id ) {
     return array(
         'price'          => $custom_fields['price'][0],
         'affiliate_link' => $custom_fields['affiliate_link'][0],
-        'slider_images'  => array() // @TODO Add slider images
+        'slider_images'  => $custom_fields['slider_image']
     );
 }

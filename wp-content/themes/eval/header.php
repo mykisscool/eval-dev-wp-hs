@@ -6,7 +6,9 @@
 <?php wp_head(); ?>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.0/basicLightbox.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" crossorigin="anonymous">
 <script src="//cdnjs.cloudflare.com/ajax/libs/basicLightbox/5.0.0/basicLightbox.min.js" defer></script>
+<script src="//cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
